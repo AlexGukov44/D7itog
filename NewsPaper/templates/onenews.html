@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% extends 'flatpages/default.html' %}</title>
+
+    {% load censor %}
+    {% load custom_tags %}
+
+    {% block title %}
+    Onenews
+    {% endblock title %}
+
+    {% block content %}
+    <h1>{{ onenews.title|censor }}</h1>
+    <hr>
+    {% if onenews %}
+        <table>
+            <tr>
+                <td>заголовок</td>
+                <td>дата публикации</td>
+                <td>содержание</td>
+            </tr>
+            <tr>
+            <td>{{ onenews.title|censor}}</td>
+            <td>{{ onenews.date_in|date:'d M Y'}}</td>
+            <td>{{ onenews.text|censor|truncatechars:20}}</td>
+        </tr>
+        </table>
+    {% else %}
+        <h2>упс! её нет!</h2>
+    {% endif %}
+    {% endblock content %}
+</head>
+<body>
+
+</body>
+</html>
